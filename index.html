@@ -1,39 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#0f172a" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
   <title>MoneyPilot Lite V3</title>
-  <link rel="manifest" href="manifest.json" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-YE4SVWS5KK"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag("js", new Date());
+    gtag("config", "G-YE4SVWS5KK");
+  </script>
 </head>
 <body>
-  <div class="backgroundOverlay"></div>
-
   <div id="lockScreen" class="lockScreen">
     <div class="lockCard">
       <div class="lockLogo">💰</div>
       <h1 id="lockHeading">MoneyPilot</h1>
       <p id="lockSubHeading">Securing your financial data...</p>
-
-      <input id="userNameInput" class="pinInput" type="text" maxlength="30" placeholder="Enter Your Name" autocomplete="name" style="display:none;" />
-      <input id="pinInput" class="pinInput" type="password" maxlength="6" inputmode="numeric" placeholder="Enter 6-digit PIN" autocomplete="off" />
-      <input id="confirmPinInput" class="pinInput" type="password" maxlength="6" inputmode="numeric" placeholder="Confirm PIN" autocomplete="off" style="display:none;" />
-
+      <input id="userNameInput" class="pinInput" type="text" maxlength="30" placeholder="Enter Your Name" autocomplete="name" style="display:none;">
+      <input id="pinInput" class="pinInput" type="password" maxlength="6" inputmode="numeric" placeholder="Enter 6-digit PIN" autocomplete="off">
+      <input id="confirmPinInput" class="pinInput" type="password" maxlength="6" inputmode="numeric" placeholder="Confirm PIN" autocomplete="off" style="display:none;">
       <button id="unlockBtn" class="authBtn">Continue</button>
       <div id="forgotPinBtn" class="forgotPin">Forgot PIN?</div>
     </div>
   </div>
-
-  <div id="securitySetupPage" class="authPage hidden">
+  <div id="securitySetupPage" class="authPage">
     <div class="authCard">
       <h2>🔐 Secure Your Account</h2>
       <p class="securityDescription">Setup a security question to recover your PIN if you forget it.</p>
-
       <select id="securityQuestion">
         <option value="">Select Security Question</option>
         <option>What is your mother's birth year?</option>
@@ -42,110 +41,97 @@
         <option>What is your favourite city?</option>
         <option>What is your childhood nickname?</option>
       </select>
-
-      <input id="securityAnswer" type="text" placeholder="Answer" autocomplete="off" />
-      <button id="saveSecurityBtn">Save &amp; Continue</button>
+      <input id="securityAnswer" type="text" placeholder="Answer" autocomplete="off">
+      <button id="saveSecurityBtn">Save & Continue</button>
     </div>
   </div>
-
-  <div id="forgotPinPage" class="authPage hidden">
+  <div id="forgotPinPage" class="authPage">
     <div class="authCard">
       <h2>🔑 Recover PIN</h2>
       <p class="securityDescription">Answer your security question to reset your PIN.</p>
       <div id="forgotQuestion" class="securityQuestionText"></div>
-      <input id="forgotAnswer" type="text" placeholder="Your Answer" autocomplete="off" />
+      <input id="forgotAnswer" type="text" placeholder="Your Answer" autocomplete="off">
       <button id="verifySecurityBtn">Continue</button>
     </div>
   </div>
-
-  <div id="resetPinPage" class="authPage hidden">
+  <div id="resetPinPage" class="authPage">
     <div class="authCard">
       <h2>🔒 Create New PIN</h2>
       <p class="securityDescription">Your identity has been verified. Please create a new 6-digit PIN.</p>
-
-      <input id="newPinInput" type="password" maxlength="6" placeholder="New PIN" inputmode="numeric" />
-      <input id="confirmNewPinInput" type="password" maxlength="6" placeholder="Confirm New PIN" inputmode="numeric" />
+      <input id="newPinInput" type="password" maxlength="6" placeholder="New PIN" inputmode="numeric">
+      <input id="confirmNewPinInput" type="password" maxlength="6" placeholder="Confirm New PIN" inputmode="numeric">
       <button id="saveNewPinBtn">Save New PIN</button>
     </div>
   </div>
-
+  <div class="backgroundOverlay"></div>
   <div class="app">
     <section id="homePage" class="page active">
       <header class="header">
         <div class="profileSection">
-          <img id="profileImage" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80" class="profileImage" alt="Profile" />
+          <img id="profileImage" src="assets/profile.jpg" class="profileImage" alt="Profile">
           <div>
             <p id="greeting" class="greeting">Good Morning 👋</p>
-            <h2 id="userName">Vijay</h2>
+            <h2 id="userName"></h2>
           </div>
         </div>
-
         <div class="monthCard">
-          <button id="prevMonth" class="monthButton" type="button">◀</button>
-          <input type="month" id="monthFilter" value="2026-09" />
-          <button id="nextMonth" class="monthButton" type="button">▶</button>
+          <button id="prevMonth" class="monthButton">◀</button>
+          <input type="month" id="monthFilter">
+          <button id="nextMonth" class="monthButton">▶</button>
         </div>
       </header>
-
       <section class="balanceCard">
         <p>💰 Cash Balance</p>
-        <h1 id="cashBalance">₹42,350</h1>
-
+        <h1 id="cashBalance">₹0</h1>
         <div class="summaryGrid">
           <div class="smallCard incomeCard">
             <div class="cardTop">
               <span class="emoji">💰</span>
               <span class="cardTitle">Income</span>
             </div>
-            <h3 id="incomeValue">₹ 1,12,800</h3>
+            <h3 id="incomeValue">₹ 0</h3>
           </div>
-
           <div class="smallCard expenseCard">
             <div class="cardTop">
               <span class="emoji">💸</span>
               <span class="cardTitle">Expense</span>
             </div>
-            <h3 id="expenseValue">₹ 68,450</h3>
+            <h3 id="expenseValue">₹ 0</h3>
           </div>
-
           <div class="smallCard investmentCard">
             <div class="cardTop">
               <span class="emoji">📈</span>
               <span class="cardTitle">Monthly Investment</span>
             </div>
-            <h3 id="investmentTotal">₹ 18,500</h3>
+            <h3 id="investmentTotal">₹ 0</h3>
           </div>
-
           <div class="smallCard savingCard">
             <div class="cardTop">
               <span class="emoji">💵</span>
               <span class="cardTitle">Monthly Saving</span>
             </div>
-            <h3 id="netWorth">₹ 44,350</h3>
+            <h3 id="netWorth">₹ 0</h3>
           </div>
         </div>
       </section>
-
       <section class="netWorthNavigation">
         <div id="openNetWorthPage" class="netWorthCard">
           <div class="left">
             <div class="diamond">💎</div>
             <div class="netWorthText">
               <h3>Total Net Worth</h3>
-              <span>View Assets &amp; Liabilities</span>
+              <span>View Assets & Liabilities</span>
             </div>
           </div>
           <div class="arrow">❯</div>
         </div>
       </section>
-
       <section id="benefitCardSection" class="recentCard hidden">
         <div class="cardHeader">
           <h2>💳 Benefit Cards</h2>
         </div>
         <div id="benefitCardList"></div>
       </section>
-
       <section class="recentCard">
         <div class="cardHeader">
           <h2>Recent Transactions</h2>
@@ -153,17 +139,15 @@
         </div>
         <div id="recentTransactionList"></div>
       </section>
+      <button id="fabButton" class="fab">+</button>
     </section>
-
     <section id="transactionsPage" class="page">
       <header class="pageHeader">
         <h2>💸 Transactions</h2>
       </header>
-
       <div class="searchBox">
-        <input type="text" id="searchTransaction" placeholder="Search transaction..." />
+        <input type="text" id="searchTransaction" placeholder="Search transaction...">
       </div>
-
       <div class="filterRow">
         <select id="transactionTypeFilter">
           <option value="">All Types</option>
@@ -171,24 +155,19 @@
           <option value="expense">Expense</option>
           <option value="investment">Investment</option>
         </select>
-
         <select id="categoryFilter">
           <option value="">All Categories</option>
         </select>
       </div>
-
       <section id="benefitTransactionSummary" class="recentCard hidden">
         <div id="benefitTransactionSummaryContent"></div>
       </section>
-
       <div id="transactionList" class="transactionList"></div>
     </section>
-
     <section id="analyticsPage" class="page">
       <header class="pageHeader">
         <h2>📊 Analytics</h2>
       </header>
-
       <div class="analyticsCard">
         <h3>Monthly Summary</h3>
         <div class="analyticsStats">
@@ -202,12 +181,10 @@
           </div>
         </div>
       </div>
-
       <div class="analyticsCard">
         <h3 id="analyticsHeading">Expense Breakdown</h3>
         <div id="categorySummary"></div>
       </div>
-
       <div id="benefitAnalyticsCard" class="analyticsCard hidden">
         <h3>💳 Benefit Card Analytics</h3>
         <div class="benefitAnalyticsHeader">
@@ -216,21 +193,18 @@
         <div id="benefitAnalyticsContent"></div>
       </div>
     </section>
-
     <section id="netWorthPage" class="page">
       <header class="pageHeader">
-        <button id="backFromNetWorth" class="backButton">←</button>
+        <button id="backFromNetWorth">←</button>
         <h2>Total Net Worth</h2>
-        <button id="addNetWorth" class="addButton">+ Add</button>
+        <button id="addNetWorth">+ Add</button>
       </header>
-
       <div class="netWorthSummary">
         <div class="summaryCard">
           <p>Total Net Worth</p>
           <h2 id="totalWorthValue">₹0</h2>
         </div>
       </div>
-
       <div class="netWorthGrid">
         <div id="assetSummaryCard" class="summaryCard expandableCard">
           <div class="summaryCardTop">
@@ -239,7 +213,6 @@
           </div>
           <h3 id="assetTotal">₹0</h3>
         </div>
-
         <div id="liabilitySummaryCard" class="summaryCard expandableCard">
           <div class="summaryCardTop">
             <p>Liabilities</p>
@@ -247,69 +220,73 @@
           </div>
           <h3 id="liabilityTotal">₹0</h3>
         </div>
-
         <div class="summaryCard">
           <p>Cash Balance</p>
           <h3 id="cashBalanceWorth">₹0</h3>
         </div>
-
         <div class="summaryCard">
           <p>Monthly Investment</p>
           <h3 id="investmentWorth">₹0</h3>
         </div>
       </div>
-
       <div id="assetListContainer" class="assetListContainer">
         <h3 class="expandTitle">🏦 Assets</h3>
         <div id="assetList"></div>
       </div>
-
       <div id="liabilityListContainer" class="assetListContainer">
         <h3 class="expandTitle">💳 Liabilities</h3>
-        <div id="liabilityList"></div>
+        <div id="liabilityList">
+          <div class="emptyState">
+            <div class="emptyIcon">💳</div>
+            <p>No Liabilities Yet</p>
+            <span>Add your first liability.</span>
+          </div>
+        </div>
       </div>
     </section>
-
     <section id="settingsPage" class="page">
       <header class="pageHeader">
         <h2>⚙️ Settings</h2>
       </header>
       <div class="settingsList">
-        <button id="profileBtn" class="settingsBtn">👤 Profile</button>
-        <button id="exportBtn" class="settingsBtn">📤 Export Backup</button>
-        <button id="importBtn" class="settingsBtn">📥 Import Backup</button>
-        <button id="resetBtn" class="settingsBtn">🗑 Reset Data</button>
-        <button id="lockBtn" class="settingsBtn">🔒 App Lock</button>
-        <button id="aboutBtn" class="settingsBtn">ℹ About</button>
+        <button id="profileBtn">👤 Profile</button>
+        <button id="exportBtn">📤 Export Backup</button>
+        <button id="importBtn">📥 Import Backup</button>
+        <button id="resetBtn">🗑 Reset Data</button>
+        <button id="lockBtn">🔒 App Lock</button>
+        <button id="aboutBtn">ℹ About</button>
       </div>
     </section>
-
-    <button id="fabButton" class="fab">+</button>
-  </div>
-
-  <div id="addTransactionSheet" class="bottomSheet">
-    <div id="sheetHandle" class="sheetHandle"></div>
-    <div class="sheetHeader">
-      <h2>Add Transaction</h2>
-      <button id="closeSheetBtn" class="closeSheetBtn">✕</button>
-    </div>
-
-    <div class="sheetContent">
-      <input id="amount" type="number" placeholder="Amount" />
-      <input id="note" type="text" placeholder="Description (Optional)" />
-      <input id="date" type="date" />
-      <select id="type">
-        <option value="expense">Expense</option>
-        <option value="income">Income</option>
-        <option value="investment">Investment</option>
-      </select>
-      <select id="category">
-        <option value="">Select Category</option>
-      </select>
-      <button id="saveButton">Save Transaction</button>
+    <div id="addTransactionSheet" class="bottomSheet">
+      <div id="sheetHandle" class="sheetHandle"></div>
+      <div class="sheetHeader">
+        <h2>Add Transaction</h2>
+        <button id="closeSheetBtn">✕</button>
+      </div>
+      <div class="sheetContent">
+        <input id="amount" type="number" placeholder="Amount">
+        <input id="note" type="text" placeholder="Description (Optional)">
+        <input id="date" type="date">
+        <select id="type">
+          <option value="expense">Expense</option>
+          <option value="income">Income</option>
+          <option value="investment">Investment</option>
+        </select>
+        <select id="category">
+          <option value="">Select Category</option>
+        </select>
+        <button id="saveButton">Save Transaction</button>
+      </div>
     </div>
   </div>
-
-  <script src="script.js"></script>
+  <div id="toast" class="toast"></div>
+  <input type="file" id="backupFile" style="display:none;">
+  <script src="storage.js"></script>
+  <script src="auth.js"></script>
+  <script src="navigation.js"></script>
+  <script src="dashboard.js"></script>
+  <script src="transactions.js"></script>
+  <script src="networth.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
