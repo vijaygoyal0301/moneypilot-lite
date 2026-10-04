@@ -160,21 +160,25 @@ $("saveNewPinBtn").addEventListener("click", saveNewPin);
 document.addEventListener("DOMContentLoaded", initializeAuthentication);
 
 function initializeAuthentication(){
-    if(!hasPin()){
-        setupMode();
-        return;
+    // Skip PIN screen entirely - go directly to dashboard
+    hideLockScreen();
+    
+    // Ensure logged-in session
+    sessionStorage.setItem(AUTH.SESSION_KEY, "true");
+    AUTH.initialized = true;
+    
+    // Initialize user name if not set
+    if(!localStorage.getItem("mp_user_name")){
+        localStorage.setItem("mp_user_name", "User");
     }
-    if(isLoggedIn()){
-        hideLockScreen();
-        if(typeof updateGreeting === "function"){
-            updateGreeting();
-        }
-        if(typeof calculateDashboard === "function"){
-            calculateDashboard();
-        }
-        return;
+    
+    // Load app functions
+    if(typeof updateGreeting === "function"){
+        updateGreeting();
     }
-    loginMode();
+    if(typeof calculateDashboard === "function"){
+        calculateDashboard();
+    }
 }
 
 function setupMode(){
